@@ -1,0 +1,49 @@
+﻿name: Lint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  python-lint:
+    name: Python - flake8
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install flake8
+        run: pip install flake8
+
+      - name: Run flake8
+        run: |
+          flake8 server/djangoapp server/djangoproj \
+            --max-line-length=120 \
+            --exclude=__pycache__,migrations
+
+  javascript-lint:
+    name: JavaScript - JSHint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: Install JSHint
+        run: npm install -g jshint
+
+      - name: Lint server/database
+        run: |
+          jshint server/database/app.js \
+                 server/database/review.js \
+                 server/database/dealership.js \
+                 server/database/inventory.js

@@ -1,0 +1,2 @@
+PS D:\xrwvm-fullstack_developer_capstone\server\database> curl.exe -s http://localhost:3030/fetchReviews/dealer/8
+[{"_id":"6ae03a54849c493bbbb2289e","id":51,"name":"Root User","dealership":8,"review":"Outstanding service and great experience at Bytecard!","purchase":true,"purchase_date":"10/27/2026","car_make":"Toyota","car_model":"Camry","car_year":2023,"__v":0}]
